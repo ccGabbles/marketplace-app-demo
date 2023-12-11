@@ -15,7 +15,7 @@ function App() {
      // const iframeWrapperRef = document.getElementById('root')
      window.iframeRef = iframeWrapperRef;
 
-     window.postRobot = sdk.postRobot
+    //  window.postRobot = sdk.postRobot
      sdk.location.CustomField?.frame.updateHeight(55)
    })
  }, []);
