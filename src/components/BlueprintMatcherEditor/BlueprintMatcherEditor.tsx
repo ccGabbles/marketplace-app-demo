@@ -29,8 +29,21 @@ const BlueprintMatcherEditor = () => {
     value: string
   ) => {
     setJsonData((prevData) => {
-      const newData:any = { ...prevData };
-      newData[category][index][field] = value;
+      const newData: JsonData = { ...prevData };
+      const newItem: VacancyItem = { ...newData[category][index] };
+
+      // Use a helper function to update nested fields
+      const updateNestedField = (obj: any, keys: string[], newValue: string) => {
+        if (keys.length === 1) {
+          obj[keys[0]] = newValue;
+        } else {
+          updateNestedField(obj[keys[0]], keys.slice(1), newValue);
+        }
+      };
+
+      updateNestedField(newItem, field.split('.'), value);
+      newData[category][index] = newItem;
+
       return newData;
     });
   };
@@ -91,8 +104,6 @@ const BlueprintMatcherEditor = () => {
 
   return (
     <div>
-      <h1>Edit JSON</h1>
-
       <form>
         {renderCategory('default', 'Default')}
         {renderCategory('vacancy_id', 'Vacancy ID')}
