@@ -33,16 +33,8 @@ function App() {
    <div ref={ref} className="extension-wrapper">
      <div className="btn-wrapper">
        <Button buttonType="tertiary-outline" onClick={handleClick}>
-         Choose a file
+         Open Blueprint Editor
        </Button>
-       <span className="text">
-         or
-       </span>
-       <span onClick={() => {}}
-         className="upload-btn"
-       >
-         Upload a new File
-       </span>
      </div>
    </div>
  );
