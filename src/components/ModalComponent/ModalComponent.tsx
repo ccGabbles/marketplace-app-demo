@@ -1,11 +1,11 @@
 import { ModalFooter, ModalBody, ModalHeader, ButtonGroup, Button } from "@contentstack/venus-components"
+import React, { useEffect } from "react";
 import "./ModalComponent.css";
 import mockData from "./mockData";
 
 
 
 const SelectModal = (props:any) => {
-
   function fillElement(json: any, type: any) {
     const defaultElement = document.getElementById("default");
     const matcherElement = document.getElementById("matcher");
@@ -63,9 +63,11 @@ const SelectModal = (props:any) => {
     matcherElement.appendChild(fieldSet2).parentElement?.appendChild(fragment2);
   }
 
-  fillElement(mockData, "vacancy_id");
-  fillElement(mockData, "title");
-  fillElement(mockData, "work_area");
+  useEffect(() => {
+    fillElement(mockData, "vacancy_id");
+    fillElement(mockData, "title");
+    fillElement(mockData, "work_area");
+  }, [])
 
   return (
   <>
