@@ -1,99 +1,51 @@
-import React, { Suspense } from "react";
-import { ErrorBoundary } from "../../components/ErrorBoundary";
-import { MarketplaceAppProvider } from "../../common/providers/MarketplaceAppProvider";
-import { Route, Routes } from "react-router-dom";
-import { EntrySidebarExtensionProvider } from "../../common/providers/EntrySidebarExtensionProvider";
-import { AppConfigurationExtensionProvider } from "../../common/providers/AppConfigurationExtensionProvider";
-import { CustomFieldExtensionProvider } from "../../common/providers/CustomFieldExtensionProvider";
-import FieldModifierExtension from "../FieldModifier/FieldModifier";
+import { useEffect, useRef } from "react";
+import ContentstackAppSDK from "@contentstack/app-sdk";
+import { Button, cbModal } from "@contentstack/venus-components";
+import "@contentstack/venus-components/build/main.css";
+import SelectModal from "../../components/ModalComponent/ModalComponent";
 
-/**
- * All the routes are Lazy loaded.
- * This will ensure the bundle contains only the core code and respective route bundle
- * improving the page load time
- */
-const CustomFieldExtension = React.lazy(() => import("../CustomField/CustomField"));
-const EntrySidebarExtension = React.lazy(() => import("../SidebarWidget/EntrySidebar"));
-const AppConfigurationExtension = React.lazy(() => import("../AppConfiguration/AppConfiguration"));
-const AssetSidebarExtension = React.lazy(() => import("../AssetSidebarWidget/AssetSidebar"));
-const StackDashboardExtension = React.lazy(() => import("../DashboardWidget/StackDashboard"));
-const FullPageExtension = React.lazy(() => import("../FullPage/FullPage"));
-const PageNotFound = React.lazy(() => import("../404/404"));
-const DefaultPage = React.lazy(() => import("../index"));
 
 function App() {
-  return (
-    <ErrorBoundary>
-      <MarketplaceAppProvider>
-        <Routes>
-          <Route path="/" element={<DefaultPage />} />
-          <Route
-            path="/custom-field"
-            element={
-              <Suspense>
-                <CustomFieldExtensionProvider>
-                  <CustomFieldExtension />
-                </CustomFieldExtensionProvider>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/entry-sidebar"
-            element={
-              <Suspense>
-                <EntrySidebarExtensionProvider>
-                  <EntrySidebarExtension />
-                </EntrySidebarExtensionProvider>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/app-configuration"
-            element={
-              <Suspense>
-                <AppConfigurationExtensionProvider>
-                  <AppConfigurationExtension />
-                </AppConfigurationExtensionProvider>
-              </Suspense>
-            }
-          />
-          <Route
-            path="/asset-sidebar"
-            element={
-              <Suspense>
-                <AssetSidebarExtension />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/stack-dashboard"
-            element={
-              <Suspense>
-                <StackDashboardExtension />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/full-page"
-            element={
-              <Suspense>
-                <FullPageExtension />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/field-modifier"
-            element={
-              <Suspense>
-                <FieldModifierExtension />
-              </Suspense>
-            }
-          />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </MarketplaceAppProvider>
-    </ErrorBoundary>
-  );
+ const ref = useRef(null);
+ useEffect(() => {
+   ContentstackAppSDK.init().then((sdk) => {
+     // The snapshot of referenced DOM Element will render in-place of custom field when modal is opened
+     const iframeWrapperRef = ref.current
+     // or
+     // const iframeWrapperRef = document.getElementById('root')
+     window.iframeRef = iframeWrapperRef;
+
+     window.postRobot = sdk.postRobot
+     sdk.location.CustomField?.frame.updateHeight(55)
+   })
+ }, []);
+
+ const handleClick = (e:any) => {
+   cbModal({
+     component: (props:any) => (<SelectModal {...props} />),
+     modalProps: {
+       size: "max"
+     }
+   })
+ }
+
+ return (
+   <div ref={ref} className="extension-wrapper">
+     <div className="btn-wrapper">
+       <Button buttonType="tertiary-outline" onClick={handleClick}>
+         Choose a file
+       </Button>
+       <span className="text">
+         or
+       </span>
+       <span onClick={() => {}}
+         className="upload-btn"
+       >
+         Upload a new File
+       </span>
+     </div>
+   </div>
+ );
 }
 
 export default App;
