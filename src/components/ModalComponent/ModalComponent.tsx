@@ -71,9 +71,8 @@ const SelectModal = (props:any) => {
 
   return (
   <div style={{
-    width: 'calc(100vw-100px)',
-    height: 'calc(100vw-100px)',
-    borderRadius: 'inherit'
+    width: 'calc(100vw - 100px)',
+    height: 'calc(100vh - 100px)'
   }}>
     <ModalHeader title={"Select Asset"} closeModal={props.closeModal} />
     <ModalBody className="modalBodyCustomClass">
