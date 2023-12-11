@@ -2,9 +2,14 @@ import { ModalFooter, ModalBody, ModalHeader, ButtonGroup, Button } from "@conte
 import BlueprintMatcherEditor from "../BlueprintMatcherEditor/BlueprintMatcherEditor";
 import "./ModalComponent.css";
 
-
-
 const SelectModal = (props:any) => {
+
+  const saveAndClose = () => {
+    window.postRobot();
+    console.log('am i herE?');
+    props.closeModal();
+  }
+
   return (
     <div style={{
       width: 'calc(100vw - 100px)',
@@ -14,14 +19,14 @@ const SelectModal = (props:any) => {
       <ModalBody className="modalBodyCustomClass" style={{
         maxHeight: 'calc(100vh - 224px)'
       }}>
-        <BlueprintMatcherEditor/>
+        <BlueprintMatcherEditor />
       </ModalBody>
       <ModalFooter>
         <ButtonGroup>
           <Button onClick={props.closeModal} buttonType="light">
             Cancel
           </Button>
-          <Button onClick={props.closeModal} icon="SaveWhite" disabled>
+          <Button onClick={saveAndClose} icon="SaveWhite">
             Save Blueprint matcher
           </Button>
         </ButtonGroup>
