@@ -75,7 +75,9 @@ const SelectModal = (props:any) => {
     height: 'calc(100vh - 100px)'
   }}>
     <ModalHeader title={"Select Asset"} closeModal={props.closeModal} />
-    <ModalBody className="modalBodyCustomClass">
+    <ModalBody className="modalBodyCustomClass" style={{
+      height: 'calc(100vh - 224px)'
+    }}>
       <form id="matcher">
         <fieldset>
           <input id="default" type="text" />
