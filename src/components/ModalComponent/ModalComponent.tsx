@@ -70,7 +70,11 @@ const SelectModal = (props:any) => {
   }, [])
 
   return (
-  <>
+  <div style={{
+    width: 'calc(100vw-100px)',
+    height: 'calc(100vw-100px)',
+    borderRadius: 'inherit'
+  }}>
     <ModalHeader title={"Select Asset"} closeModal={props.closeModal} />
     <ModalBody className="modalBodyCustomClass">
       <form id="matcher">
@@ -90,7 +94,7 @@ const SelectModal = (props:any) => {
         </Button>
       </ButtonGroup>
     </ModalFooter>
-  </>
+  </div>
 )}
 
 export default SelectModal;

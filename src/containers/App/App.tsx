@@ -24,7 +24,7 @@ function App() {
    cbModal({
      component: (props:any) => (<SelectModal {...props} />),
      modalProps: {
-       size: "max"
+       size: "customSize"
      }
    })
  }
