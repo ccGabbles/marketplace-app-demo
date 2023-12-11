@@ -33,7 +33,7 @@ function App() {
    <div ref={ref} className="extension-wrapper">
      <div className="btn-wrapper">
        <Button buttonType="tertiary-outline" onClick={handleClick}>
-         Open Blueprint Editor
+         Open Blueprint Matcher Editor
        </Button>
      </div>
    </div>
