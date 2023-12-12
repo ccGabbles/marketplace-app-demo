@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Accordion } from "@contentstack/venus-components"
 import ContentstackAppSDK from "@contentstack/app-sdk";
 
@@ -18,17 +18,22 @@ interface VacancyItem {
 
 
 const BlueprintMatcherEditor = () => {
-  let CSdata: any = {
+  const [jsonData, setJsonData] = useState<JsonData>({
     vacancy_id: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     title: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     work_area: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     default: [{ condition: '', blueprints: { vacancy_detail: '' } }],
-  };
-  const [jsonData, setJsonData] = useState<JsonData>(CSdata);
-
-  ContentstackAppSDK.init().then((sdk) => {
-    setJsonData (sdk.location.CustomField?.field.getData())
   });
+
+  useEffect(() => {
+    // Fetch data from Contentstack SDK
+    ContentstackAppSDK.init().then((sdk) => {
+      const newData = sdk.location.CustomField?.field.getData();
+
+      // Update state with the new data
+      setJsonData(newData);
+    });
+  }, []);
 
   const handleInputChange = (
     category: keyof JsonData,
