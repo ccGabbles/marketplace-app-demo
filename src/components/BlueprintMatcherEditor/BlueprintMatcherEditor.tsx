@@ -152,10 +152,12 @@ const BlueprintMatcherEditor = (props: any) => {
 
       <Button buttonType="primary" icon="SaveWhite" onClick={() => save()}>Save</Button>
 
-      <div>
-        <h2>Updated JSON:</h2>
+      <Accordion
+        title="Json Preview"
+        isContainerization
+        version="v2">
         <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-      </div>
+      </Accordion>
     </div>
   );
 };
