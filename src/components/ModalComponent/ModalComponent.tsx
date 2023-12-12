@@ -6,13 +6,15 @@ import { useEffect } from "react";
 
 const SelectModal = (props:any) => {
   useEffect(() => {
-    ContentstackAppSDK.init().then((sdk) => {
-      window.postRobot = sdk.postRobot
+    ContentstackAppSDK.init().then(async (sdk) => {
+      const customField = await sdk.location.CustomField;
+      const myjsonvalue = {"a":"1"}
+      await customField?.entry.setData(myjsonvalue);
     })
   }, []);
 
   const saveAndClose = () => {
-    window.postRobot();
+
     props.closeModal();
   }
 

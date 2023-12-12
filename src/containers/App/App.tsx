@@ -15,7 +15,6 @@ function App() {
      // const iframeWrapperRef = document.getElementById('root')
      window.iframeRef = iframeWrapperRef;
 
-    //  window.postRobot = sdk.postRobot
      sdk.location.CustomField?.frame.updateHeight(55)
    })
  }, []);
@@ -32,7 +31,11 @@ function App() {
  return (
    <div ref={ref} className="extension-wrapper">
      <div className="btn-wrapper">
-       <Button buttonType="tertiary-outline" onClick={handleClick}>
+       <Button  onClick={handleClick}
+             buttonType="secondary"
+             icon="FullPageApp"
+             size="large"
+             version="v2">
          Open Blueprint Matcher Editor
        </Button>
      </div>
