@@ -6,9 +6,6 @@ import ContentstackAppSDK from "@contentstack/app-sdk";
 const SelectModal = (props:any) => {
 
   const close = () => {
-    ContentstackAppSDK.init().then(async (sdk) => {
-      sdk.location.CustomField?.field.setData()
-          })
     props.closeModal();
   }
 
