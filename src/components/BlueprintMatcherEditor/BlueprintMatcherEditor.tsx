@@ -27,8 +27,10 @@ const BlueprintMatcherEditor = () => {
 
   ContentstackAppSDK.init().then((sdk) => {
     CSdata = sdk.location.CustomField?.field.getData()
+    console.log(CSdata, 1);
   });
 
+  console.log(CSdata, 2);
   const [jsonData, setJsonData] = useState<JsonData>(CSdata);
 
   const handleInputChange = (
