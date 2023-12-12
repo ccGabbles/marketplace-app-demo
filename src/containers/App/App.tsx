@@ -16,6 +16,7 @@ function App() {
      window.iframeRef = iframeWrapperRef;
 
      sdk.location.CustomField?.frame.updateHeight(55)
+     console.log(sdk);
      sdk.location.CustomField?.field.setData({'test': true})
    })
  }, []);
