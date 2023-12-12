@@ -24,14 +24,11 @@ const BlueprintMatcherEditor = () => {
     work_area: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     default: [{ condition: '', blueprints: { vacancy_detail: '' } }],
   };
+  const [jsonData, setJsonData] = useState<JsonData>(CSdata);
 
   ContentstackAppSDK.init().then((sdk) => {
-    CSdata = sdk.location.CustomField?.field.getData()
-    console.log(CSdata, 1);
+    setJsonData (sdk.location.CustomField?.field.getData())
   });
-
-  console.log(CSdata, 2);
-  const [jsonData, setJsonData] = useState<JsonData>(CSdata);
 
   const handleInputChange = (
     category: keyof JsonData,
