@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Accordion } from "@contentstack/venus-components"
+import ContentstackAppSDK from "@contentstack/app-sdk";
 
 interface JsonData {
   vacancy_id: VacancyItem[];
@@ -16,6 +17,10 @@ interface VacancyItem {
 }
 
 const BlueprintMatcherEditor = () => {
+  ContentstackAppSDK.init().then((sdk) => {
+    console.log(sdk.location.CustomField?.field.getData())
+  });
+
   const [jsonData, setJsonData] = useState<JsonData>({
     vacancy_id: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     title: [{ condition: '', blueprints: { vacancy_detail: '' } }],
