@@ -7,9 +7,7 @@ import { useEffect } from "react";
 const SelectModal = (props:any) => {
   useEffect(() => {
     ContentstackAppSDK.init().then(async (sdk) => {
-      const customField = await sdk.location.CustomField;
-      const myjsonvalue = {"a":"1"}
-      await customField?.entry.setData(myjsonvalue);
+//
     })
   }, []);
 
