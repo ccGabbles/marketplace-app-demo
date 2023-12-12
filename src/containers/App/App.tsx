@@ -16,7 +16,6 @@ function App() {
      window.iframeRef = iframeWrapperRef;
 
      sdk.location.CustomField?.frame.updateHeight(55)
-     console.log(sdk.location.CustomField?.field.getData())
      sdk.location.CustomField?.field.setData({
       "vacancy_id": [
         {

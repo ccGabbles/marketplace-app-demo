@@ -16,17 +16,20 @@ interface VacancyItem {
   };
 }
 
-const BlueprintMatcherEditor = () => {
-  ContentstackAppSDK.init().then((sdk) => {
-    console.log(sdk.location.CustomField?.field.getData())
-  });
 
-  const [jsonData, setJsonData] = useState<JsonData>({
+const BlueprintMatcherEditor = () => {
+  let CSdata: any = {
     vacancy_id: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     title: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     work_area: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     default: [{ condition: '', blueprints: { vacancy_detail: '' } }],
+  };
+
+  ContentstackAppSDK.init().then((sdk) => {
+    CSdata = sdk.location.CustomField?.field.getData()
   });
+
+  const [jsonData, setJsonData] = useState<JsonData>(CSdata);
 
   const handleInputChange = (
     category: keyof JsonData,
