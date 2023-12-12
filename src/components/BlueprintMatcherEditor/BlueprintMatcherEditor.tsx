@@ -16,8 +16,7 @@ interface VacancyItem {
   };
 }
 
-
-const BlueprintMatcherEditor = () => {
+const BlueprintMatcherEditor = (props: any) => {
   const [jsonData, setJsonData] = useState<JsonData>({
     vacancy_id: [{ condition: '', blueprints: { vacancy_detail: '' } }],
     title: [{ condition: '', blueprints: { vacancy_detail: '' } }],
@@ -120,6 +119,12 @@ const BlueprintMatcherEditor = () => {
     )
   };
 
+  const save = () => {
+    ContentstackAppSDK.init().then((sdk) => {
+      sdk.location.CustomField?.field.setData(jsonData);
+    });
+  }
+
   return (
     <div>
       <form>
@@ -144,6 +149,8 @@ const BlueprintMatcherEditor = () => {
           title="Work Area"
           version="v2">{renderCategory('work_area')}</Accordion>
       </form>
+
+      <Button buttonType="primary" icon="SaveWhite" onClick={() => save()}>Save</Button>
 
       <div>
         <h2>Updated JSON:</h2>

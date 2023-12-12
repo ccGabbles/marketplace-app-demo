@@ -2,17 +2,13 @@ import { ModalFooter, ModalBody, ModalHeader, ButtonGroup, Button } from "@conte
 import BlueprintMatcherEditor from "../BlueprintMatcherEditor/BlueprintMatcherEditor";
 import "./ModalComponent.css";
 import ContentstackAppSDK from "@contentstack/app-sdk";
-import { useEffect } from "react";
 
 const SelectModal = (props:any) => {
-  useEffect(() => {
+
+  const close = () => {
     ContentstackAppSDK.init().then(async (sdk) => {
-//
-    })
-  }, []);
-
-  const saveAndClose = () => {
-
+      sdk.location.CustomField?.field.setData()
+          })
     props.closeModal();
   }
 
@@ -32,8 +28,8 @@ const SelectModal = (props:any) => {
           <Button onClick={props.closeModal} buttonType="light">
             Cancel
           </Button>
-          <Button onClick={saveAndClose} icon="SaveWhite">
-            Save Blueprint matcher
+          <Button onClick={close} icon="SaveWhite">
+            Close
           </Button>
         </ButtonGroup>
       </ModalFooter>
