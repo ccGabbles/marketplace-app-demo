@@ -16,7 +16,6 @@ function App() {
      window.iframeRef = iframeWrapperRef;
 
      sdk.location.CustomField?.frame.updateHeight(55)
-     console.log(sdk);
      sdk.location.CustomField?.field.setData({'test': true})
    })
  }, []);
@@ -33,12 +32,13 @@ function App() {
  return (
    <div ref={ref} className="extension-wrapper">
      <div className="btn-wrapper">
-       <Button  onClick={handleClick}
-             buttonType="secondary"
-             icon="FullPageApp"
-             size="large"
-             version="v2">
-         Open Blueprint Matcher Editor
+       <Button
+          onClick={handleClick}
+          buttonType="secondary"
+          icon="v2-FullPageApp"
+          size="small"
+          version="v2">
+          Open Blueprint Matcher Editor
        </Button>
      </div>
    </div>

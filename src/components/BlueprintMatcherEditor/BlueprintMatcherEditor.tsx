@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button } from "@contentstack/venus-components"
 
 interface JsonData {
   vacancy_id: VacancyItem[];
@@ -88,17 +89,17 @@ const BlueprintMatcherEditor = () => {
               }
             />
           </label>
-          <button type="button" onClick={() => handleMoveItem(category, index, index - 1)}>
+          <Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index - 1)}>
             Move Up
-          </button>
-          <button type="button" onClick={() => handleMoveItem(category, index, index + 1)}>
+          </Button>
+          <Button  onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index + 1)}>
             Move Down
-          </button>
+          </Button>
         </div>
       ))}
-      <button type="button" onClick={() => handleAddItem(category)}>
+      <Button buttonType="secondary" icon="v2-Plus" size="small" version="v2" onClick={() => handleAddItem(category)}>
         Add New Item
-      </button>
+      </Button>
     </div>
   );
 
