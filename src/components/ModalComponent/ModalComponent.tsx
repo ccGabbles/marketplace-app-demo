@@ -86,17 +86,21 @@ const SelectModal = (props: any) => {
     return (
       <div>
         {jsonData[category].map((item, index) => (
-          <div key={index}>
-            {notDefault && <label>
-              Condition:
-              <input
-                type="text"
-                value={item.condition}
-                onChange={(e) => handleInputChange(category, index, 'condition', e.target.value)}
-              />
-            </label>}
+          <div key={index} className="matcher-item">
+            {notDefault &&
+              <ButtonGroup className="reorder-buttons">
+              <Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index - 1)}>
+                Move Up
+                </Button>
+                <Button onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index + 1)}>
+                Move Down
+                </Button>
+              </ButtonGroup>
+            }
             <label>
-              Blueprints:
+              {index === 0 &&
+                <>Blueprint:</>
+              }
               <input
                 type="text"
                 value={item.blueprints.vacancy_detail}
@@ -105,16 +109,21 @@ const SelectModal = (props: any) => {
                 }
               />
             </label>
-            {notDefault &&
-              <><Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index - 1)}>
-                Move Up
-              </Button><Button onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index + 1)}>
-                  Move Down
-                </Button></>}
+            {notDefault && <label>
+              {index === 0 &&
+                <>Condition:</>
+              }
+
+              <input
+                type="text"
+                value={item.condition}
+                onChange={(e) => handleInputChange(category, index, 'condition', e.target.value)}
+              />
+            </label>}
           </div>
         ))}
         {notDefault &&
-          <Button buttonType="secondary" icon="v2-Plus" size="small" version="v2" onClick={() => handleAddItem(category)}>
+          <Button buttonType="secondary" icon="v2-Plus" size="small" version="v2" onClick={() => handleAddItem(category)} className="add-new-button">
             Add New Item
           </Button>}
       </div>
@@ -142,35 +151,34 @@ const SelectModal = (props: any) => {
         maxHeight: 'calc(100vh - 224px)'
       }}>
         <div>
-      <form>
-        <Accordion
-          accordionDataCount={1}
-          isContainerization
-          title="Default"
-          version="v2">{renderCategory('default')}</Accordion>
-        <Accordion
-          accordionDataCount={jsonData.vacancy_id.length}
-          isContainerization
-          title="Vacancy ID"
-          version="v2">{renderCategory('vacancy_id')}</Accordion>
-        <Accordion
-          accordionDataCount={jsonData.title.length}
-          title="Title"
-          isContainerization
-          version="v2">{renderCategory('title')}</Accordion>
-        <Accordion
-          accordionDataCount={jsonData.work_area.length}
-          isContainerization
-          title="Work Area"
-          version="v2">{renderCategory('work_area')}</Accordion>
-      </form>
-      <Accordion
-        title="Json Preview"
-        isContainerization
-        version="v2">
-        <pre>{JSON.stringify(jsonData, null, 2)}</pre>
-      </Accordion>
-    </div>
+          <form>
+            <Accordion
+              accordionDataCount={1}
+              isContainerization
+              title="Default"
+              version="v2">{renderCategory('default')}</Accordion>
+            <Accordion
+              accordionDataCount={jsonData.vacancy_id.length}
+              isContainerization
+              title="Vacancy ID"
+              version="v2">{renderCategory('vacancy_id')}</Accordion>
+            <Accordion
+              accordionDataCount={jsonData.title.length}
+              title="Title"
+              isContainerization
+              version="v2">{renderCategory('title')}</Accordion>
+            <Accordion
+              accordionDataCount={jsonData.work_area.length}
+              isContainerization
+              title="Work Area"
+              version="v2">{renderCategory('work_area')}</Accordion>
+          </form>
+          <Accordion
+            title="Json Preview"
+            version="v2">
+            <pre>{JSON.stringify(jsonData, null, 2)}</pre>
+          </Accordion>
+        </div>
       </ModalBody>
       <ModalFooter>
         <ButtonGroup>
