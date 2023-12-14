@@ -89,10 +89,10 @@ const SelectModal = (props: any) => {
           <div key={index} className="matcher-item">
             {notDefault &&
               <ButtonGroup className="reorder-buttons">
-              <Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index - 1)}>
+              <Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="" onClick={() => handleMoveItem(category, index, index - 1)}>
                 Move Up
                 </Button>
-                <Button onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="outline" onClick={() => handleMoveItem(category, index, index + 1)}>
+                <Button onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="" onClick={() => handleMoveItem(category, index, index + 1)}>
                 Move Down
                 </Button>
               </ButtonGroup>
@@ -175,7 +175,8 @@ const SelectModal = (props: any) => {
           </form>
           <Accordion
             title="Json Preview"
-            version="v2">
+            version="v2"
+            noChevron>
             <pre>{JSON.stringify(jsonData, null, 2)}</pre>
           </Accordion>
         </div>

@@ -16,6 +16,13 @@ input[type=text] {
 
 .reorder-buttons {
   display: grid;
+  opacity: 0;
+  transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.matcher-item:hover .reorder-buttons {
+  opacity: 1;
+  transition: opacity 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .add-new-button {
