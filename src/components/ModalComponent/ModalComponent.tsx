@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ModalFooter, ModalBody, ModalHeader, ButtonGroup, Button, Accordion } from "@contentstack/venus-components"
+import { ModalFooter, ModalBody, ModalHeader, ButtonGroup, Button, Accordion, TextInput } from "@contentstack/venus-components"
 import "./ModalComponent.css";
 import ContentstackAppSDK from "@contentstack/app-sdk";
 
@@ -101,23 +101,29 @@ const SelectModal = (props: any) => {
               {index === 0 &&
                 <>Blueprint:</>
               }
-              <input
+              <TextInput
                 type="text"
+                placeholder="%URL"
+                version="v2"
+                width="full"
                 value={item.blueprints.vacancy_detail}
-                onChange={(e) =>
+                onChange={(e:any) =>
                   handleInputChange(category, index, 'blueprints.vacancy_detail', e.target.value)
                 }
-              />
+              ></TextInput>
+
             </label>
             {notDefault && <label>
               {index === 0 &&
                 <>Condition:</>
               }
 
-              <input
+              <TextInput
                 type="text"
+                version="v2"
+                width="full"
                 value={item.condition}
-                onChange={(e) => handleInputChange(category, index, 'condition', e.target.value)}
+                onChange={(e:any) => handleInputChange(category, index, 'condition', e.target.value)}
               />
             </label>}
           </div>
@@ -151,7 +157,7 @@ const SelectModal = (props: any) => {
         maxHeight: 'calc(100vh - 224px)'
       }}>
         <div>
-          <form>
+          <form className="customAccordionSpacing">
             <Accordion
               accordionDataCount={1}
               isContainerization
