@@ -136,9 +136,9 @@ const SelectModal = (props: any) => {
                 onChange={(e:any) => handleInputChange(category, index, 'condition', e.target.value)}
               />
             </label>
-                            <Button onlyIcon icon="v2-Delete" size="small" version="v2" buttonType="" onClick={() => handleDelete(category, index)}>
-                            Delete
-                            </Button></>}
+            <Button onlyIcon icon="v2-Delete" size="small" version="v2" buttonType="" onClick={() => handleDelete(category, index)}>
+              Delete
+            </Button></>}
           </div>
         ))}
         {notDefault &&
@@ -150,8 +150,21 @@ const SelectModal = (props: any) => {
   };
 
   const save = () => {
+    removeEmptyItems();
     ContentstackAppSDK.init().then((sdk) => {
       sdk.location.CustomField?.field.setData(jsonData);
+    });
+  }
+
+  const removeEmptyItems = () => {
+    setJsonData((prevData) => {
+      const newData = { ...prevData };
+
+      newData.vacancy_id = newData.vacancy_id.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
+      newData.work_area = newData.work_area.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
+      newData.title = newData.title.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
+
+      return newData;
     });
   }
 
