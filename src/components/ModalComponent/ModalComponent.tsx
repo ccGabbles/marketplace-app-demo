@@ -151,10 +151,6 @@ const SelectModal = (props: any) => {
 
   const save = () => {
     removeEmptyItems();
-    console.log(jsonData)
-    ContentstackAppSDK.init().then((sdk) => {
-      sdk.location.CustomField?.field.setData(jsonData);
-    });
   }
 
   const removeEmptyItems = () => {
@@ -164,7 +160,9 @@ const SelectModal = (props: any) => {
       newData.vacancy_id = newData.vacancy_id.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
       newData.work_area = newData.work_area.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
       newData.title = newData.title.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
-
+      ContentstackAppSDK.init().then((sdk) => {
+        sdk.location.CustomField?.field.setData(newData);
+      });
       return newData;
     });
   }
