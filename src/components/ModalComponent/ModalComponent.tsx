@@ -160,9 +160,9 @@ const SelectModal = (props: any) => {
     setJsonData((prevData) => {
       const newData = { ...prevData };
 
-      newData.vacancy_id = newData.vacancy_id.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
-      newData.work_area = newData.work_area.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
-      newData.title = newData.title.filter((item) => item.condition.length || item.blueprints.vacancy_detail.length)
+      newData.vacancy_id = newData.vacancy_id.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
+      newData.work_area = newData.work_area.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
+      newData.title = newData.title.filter((item) => item.condition.length && item.blueprints.vacancy_detail.length)
 
       return newData;
     });
