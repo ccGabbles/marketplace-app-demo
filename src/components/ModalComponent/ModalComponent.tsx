@@ -151,6 +151,7 @@ const SelectModal = (props: any) => {
 
   const save = () => {
     removeEmptyItems();
+    console.log(jsonData)
     ContentstackAppSDK.init().then((sdk) => {
       sdk.location.CustomField?.field.setData(jsonData);
     });
