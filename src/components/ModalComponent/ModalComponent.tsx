@@ -79,6 +79,14 @@ const SelectModal = (props: any) => {
     });
   };
 
+  const handleDelete = (category: keyof JsonData, fromIndex: number) => {
+    setJsonData((prevData) => {
+      const newData = { ...prevData };
+      newData[category].splice(fromIndex, 1);
+      return newData;
+    });
+  };
+
   const renderCategory = (category: keyof JsonData) => {
 
     const notDefault = (category !== 'default')
@@ -88,14 +96,14 @@ const SelectModal = (props: any) => {
         {jsonData[category].map((item, index) => (
           <div key={index} className="matcher-item">
             {notDefault &&
-              <ButtonGroup className="reorder-buttons">
+              <div className="reorder-buttons">
               <Button onlyIcon icon="v2-ArrowUp" size="small" version="v2" buttonType="" onClick={() => handleMoveItem(category, index, index - 1)}>
                 Move Up
                 </Button>
                 <Button onlyIcon icon="v2-ArrowDown" size="small" version="v2" buttonType="" onClick={() => handleMoveItem(category, index, index + 1)}>
                 Move Down
                 </Button>
-              </ButtonGroup>
+              </div>
             }
             <label>
               {index === 0 &&
@@ -106,6 +114,7 @@ const SelectModal = (props: any) => {
                 placeholder="%URL"
                 version="v2"
                 width="full"
+                required
                 value={item.blueprints.vacancy_detail}
                 onChange={(e:any) =>
                   handleInputChange(category, index, 'blueprints.vacancy_detail', e.target.value)
@@ -113,7 +122,7 @@ const SelectModal = (props: any) => {
               ></TextInput>
 
             </label>
-            {notDefault && <label>
+            {notDefault && <><label>
               {index === 0 &&
                 <>Condition:</>
               }
@@ -122,10 +131,14 @@ const SelectModal = (props: any) => {
                 type="text"
                 version="v2"
                 width="full"
+                required
                 value={item.condition}
                 onChange={(e:any) => handleInputChange(category, index, 'condition', e.target.value)}
               />
-            </label>}
+            </label>
+                            <Button onlyIcon icon="v2-Delete" size="small" version="v2" buttonType="" onClick={() => handleDelete(category, index)}>
+                            Delete
+                            </Button></>}
           </div>
         ))}
         {notDefault &&
