@@ -87,6 +87,19 @@ const SelectModal = (props: any) => {
     });
   };
 
+  const stringToColour = (str: string) => {
+    let hash = 0;
+    str.split('').forEach(char => {
+      hash = char.charCodeAt(0) + ((hash << 5) - hash)
+    })
+    let colour = '#'
+    for (let i = 0; i < 3; i++) {
+      const value = (hash >> (i * 8)) & 0xff
+      colour += value.toString(16).padStart(2, '0')
+    }
+    return { color: colour }
+  }
+
   const renderCategory = (category: keyof JsonData) => {
 
     const notDefault = (category !== 'default')
@@ -105,7 +118,7 @@ const SelectModal = (props: any) => {
                 </Button>
               </div>
             }
-            <label>
+            <label style={stringToColour(item.blueprints.vacancy_detail)} className={(jsonData[category][index -1]?.blueprints.vacancy_detail === item.blueprints.vacancy_detail) ? 'same' : '' }>
               {index === 0 &&
                 <>Blueprint:</>
               }
@@ -115,6 +128,7 @@ const SelectModal = (props: any) => {
                 version="v2"
                 width="full"
                 required
+
                 value={item.blueprints.vacancy_detail}
                 onChange={(e:any) =>
                   handleInputChange(category, index, 'blueprints.vacancy_detail', e.target.value)

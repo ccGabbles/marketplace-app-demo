@@ -8,11 +8,31 @@ input[type=text] {
   padding: 0.25rem 1rem;
 }
 
+
+.same {
+  position: relative
+}
+
+.same:before {
+  content: '';
+  display: block;
+  bottom: 0.5rem;
+  height: 5.5rem;
+  width: 0.3rem;
+  background: currentColor;
+  left: -0.7rem;
+  position: absolute;
+}
+
 .matcher-item {
   display: grid;
   grid-template-columns: auto 1fr 1fr auto;
   grid-gap: 1rem;
   align-items: center;
+}
+
+.matcher-item label:first-child {
+  color: #000000 !important;
 }
 
 .reorder-buttons {
