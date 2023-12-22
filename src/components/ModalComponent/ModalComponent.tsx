@@ -30,7 +30,7 @@ const SelectModal = (props: any) => {
     // Fetch data from Contentstack SDK
     ContentstackAppSDK.init().then((sdk) => {
       const newData = sdk.location.CustomField?.field.getData();
-      console.log(sdk);
+      console.log(sdk.location.CustomField?.entry.content_type.title);
 
       // Update state with the new data
       setJsonData(newData);
