@@ -26,11 +26,13 @@ const SelectModal = (props: any) => {
     default: [{ condition: '', blueprints: { vacancy_detail: '' } }],
   });
 
+  const [titleMatcher, setTitleMatcher] = useState<String>("Matcher")
+
   useEffect(() => {
     // Fetch data from Contentstack SDK
     ContentstackAppSDK.init().then((sdk) => {
       const newData = sdk.location.CustomField?.field.getData();
-      console.log(sdk.location.CustomField?.entry.content_type.title);
+      setTitleMatcher(sdk.location.CustomField?.field.schema.display_name);
 
       // Update state with the new data
       setJsonData(newData);
@@ -192,7 +194,7 @@ const SelectModal = (props: any) => {
       width: 'calc(100vw - 100px)',
       height: 'calc(100vh - 100px)'
     }}>
-      <ModalHeader title={"Vacancy Matcher"} closeModal={props.closeModal} />
+      <ModalHeader title={titleMatcher} closeModal={props.closeModal} />
       <ModalBody className="modalBodyCustomClass" style={{
         maxHeight: 'calc(100vh - 224px)'
       }}>
