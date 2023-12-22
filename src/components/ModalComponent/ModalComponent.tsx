@@ -31,6 +31,7 @@ const SelectModal = (props: any) => {
   useEffect(() => {
     // Fetch data from Contentstack SDK
     ContentstackAppSDK.init().then((sdk) => {
+      console.log(sdk)
       const newData = sdk.location.CustomField?.field.getData();
       setTitleMatcher(sdk.location.CustomField?.field.schema.display_name);
 
